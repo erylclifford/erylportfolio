@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eryl Clifford — Senior Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Code&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f5f5f5;
+      --surface:   #ffffff;
+      --border:    #e4e4e7;
+      --muted:     #a1a1aa;
+      --subtle:    #71717a;
+      --body:      #27272a;
+      --heading:   #09090b;
+      --accent:    #2563eb;
+      --accent-h:  #1d4ed8;
+      --accent-lo: #eff6ff;
+
+      --font-sans: 'Google Sans', 'Inter', system-ui, sans-serif;
+      --font-mono: 'Google Sans Code', 'Fira Code', 'JetBrains Mono', monospace;
+
+      --radius-sm: 6px;
+      --radius:    10px;
+      --radius-lg: 16px;
+
+      --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / .06), 0 1px 2px -1px rgb(0 0 0 / .04);
+      --shadow:    0 4px 12px -2px rgb(0 0 0 / .08), 0 2px 6px -2px rgb(0 0 0 / .05);
+      --shadow-lg: 0 16px 40px -8px rgb(0 0 0 / .12), 0 4px 12px -4px rgb(0 0 0 / .06);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--body);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Typography ───────────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    code, .mono {
+      font-family: var(--font-mono);
+      font-size: .875em;
+    }
+
+    /* ─── Layout ───────────────────────────────────────────────── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* ─── Nav ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgb(245 245 245 / .85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--heading);
+      letter-spacing: -.01em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--subtle);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--heading); }
+
+    .nav-cta {
+      font-size: .8125rem;
+      font-weight: 500;
+      padding: 7px 16px;
+      background: var(--accent);
+      color: #fff !important;
+      border-radius: var(--radius-sm);
+      transition: background .2s, transform .15s;
+    }
+
+    .nav-cta:hover { background: var(--accent-h) !important; transform: translateY(-1px); }
+
+    /* ─── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      padding: 140px 0 96px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--accent);
+      background: var(--accent-lo);
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 4px 12px;
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: .4; }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--subtle);
+      max-width: 540px;
+      margin-bottom: 40px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .9rem;
+      font-weight: 500;
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      transition: all .2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 4px 14px rgb(37 99 235 / .3); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--body);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { background: var(--surface); border-color: #d4d4d8; transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .stat-num {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: -.03em;
+    }
+
+    .stat-label {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ─── About ────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .about-grid h2 { font-size: 2rem; margin-bottom: 16px; }
+
+    .about-grid p { color: var(--subtle); margin-bottom: 16px; }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      padding: 4px 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--subtle);
+    }
+
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      letter-spacing: -.02em;
+    }
+
+    .about-card-name { font-weight: 600; color: var(--heading); }
+    .about-card-role { font-size: .8rem; color: var(--muted); }
+
+    .about-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .875rem;
+    }
+
+    .about-item:last-child { border-bottom: none; }
+    .about-item-key { color: var(--muted); }
+    .about-item-val { font-weight: 500; color: var(--heading); }
+
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      padding: 3px 9px;
+      background: #fef9c3;
+      color: #854d0e;
+      border: 1px solid #fde68a;
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+
+    /* ─── Work ─────────────────────────────────────────────────── */
+    #work { background: var(--surface); }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .work-header h2 { font-size: 2rem; }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+      display: block;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+
+    .project-card.featured {
+      grid-column: span 2;
+    }
+
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-thumb-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .project-thumb-label {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background: rgb(255 255 255 / .6);
+      border-radius: 4px;
+      color: var(--subtle);
+      backdrop-filter: blur(4px);
+    }
+
+    .thumb-dpe {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #c7d2fe 100%);
+    }
+
+    .thumb-dolphin {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+    }
+
+    .thumb-almarai {
+      background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #f9a8d4 100%);
+    }
+
+    .thumb-novicore {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+    }
+
+    .project-card.featured .project-thumb {
+      aspect-ratio: 21/9;
+    }
+
+    .project-body { padding: 22px; }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .project-type {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+    }
+
+    .project-year {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .project-body h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .project-body p {
+      font-size: .875rem;
+      color: var(--subtle);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .project-metric {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      padding: 4px 10px;
+      background: var(--accent-lo);
+      color: var(--accent);
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .stack-tag {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      padding: 3px 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+    }
+
+    .project-links { display: flex; gap: 10px; }
+
+    .link-btn {
+      font-size: .8125rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--body);
+      transition: all .18s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .link-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lo); }
+
+    .link-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .link-btn.primary:hover { background: var(--accent-h); border-color: var(--accent-h); color: #fff; }
+
+    /* ─── Skills ───────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .skill-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+
+    .skill-icon {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      background: var(--accent-lo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 1rem;
+    }
+
+    .skill-card h4 {
+      font-size: .9375rem;
+      margin-bottom: 10px;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8125rem;
+      color: var(--subtle);
+    }
+
+    .skill-item::before {
+      content: '';
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── Experience ───────────────────────────────────────────── */
+    #experience { background: var(--surface); }
+
+    .timeline { position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      padding-left: 28px;
+      padding-bottom: 40px;
+      position: relative;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -4px; top: 8px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--surface);
+    }
+
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .timeline-company {
+      font-family: var(--font-mono);
+      font-size: .775rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .timeline-role { font-size: 1.025rem; font-weight: 600; }
+
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .timeline-desc {
+      font-size: .875rem;
+      color: var(--subtle);
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+
+    .timeline-bullets {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .timeline-bullets li {
+      font-size: .8375rem;
+      color: var(--subtle);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .timeline-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      top: 2px;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    /* ─── Education ────────────────────────────────────────────── */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-top: 48px;
+    }
+
+    .edu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .edu-school {
+      font-family: var(--font-mono);
+      font-size: .775rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .edu-degree { font-size: 1rem; font-weight: 600; }
+
+    .edu-year {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .edu-courses {
+      font-size: .8375rem;
+      color: var(--subtle);
+      line-height: 1.65;
+      margin-top: 10px;
+    }
+
+    /* ─── Writing ──────────────────────────────────────────────── */
+    .writing-list { display: flex; flex-direction: column; gap: 1px; }
+
+    .writing-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all .18s;
+    }
+
+    .writing-item:first-child { border-top: 1px solid var(--border); }
+
+    .writing-item:hover .writing-title { color: var(--accent); }
+
+    .writing-date {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+      min-width: 90px;
+      flex-shrink: 0;
+    }
+
+    .writing-title {
+      font-size: .9375rem;
+      font-weight: 500;
+      color: var(--heading);
+      transition: color .18s;
+    }
+
+    .writing-tag {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      padding: 2px 8px;
+      background: var(--accent-lo);
+      color: var(--accent);
+      border-radius: 4px;
+      margin-left: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ─── Contact ──────────────────────────────────────────────── */
+    #contact { background: var(--surface); }
+
+    .contact-inner {
+      max-width: 520px;
+    }
+
+    .contact-inner h2 { font-size: 2rem; margin-bottom: 12px; }
+
+    .contact-inner p { color: var(--subtle); margin-bottom: 32px; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      font-size: .8125rem;
+      font-weight: 500;
+      color: var(--body);
+    }
+
+    input, textarea {
+      font-family: var(--font-sans);
+      font-size: .9rem;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--heading);
+      transition: border-color .18s, box-shadow .18s;
+      outline: none;
+      resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgb(37 99 235 / .1);
+    }
+
+    textarea { min-height: 120px; }
+
+    .contact-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--subtle);
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      transition: all .18s;
+    }
+
+    .social-link:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-lo); }
+
+    /* ─── Langs ─────────────────────────────────────────────────── */
+    .lang-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .lang-chip {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 12px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .lang-name {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--heading);
+    }
+
+    .lang-level {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--muted);
+    }
+
+    /* ─── Footer ───────────────────────────────────────────────── */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .footer-back {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--muted);
+      transition: color .18s;
+    }
+
+    .footer-back:hover { color: var(--accent); }
+
+    /* ─── Divider ──────────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      section { padding: 60px 0; }
+      .hero { padding: 108px 0 64px; }
+
+      .nav-links { display: none; }
+
+      .about-grid,
+      .projects-grid,
+      .skills-grid,
+      .form-row { grid-template-columns: 1fr; }
+
+      .project-card.featured { grid-column: span 1; }
+      .project-card.featured .project-thumb { aspect-ratio: 16/9; }
+
+      .hero h1 { font-size: 2rem; }
+      .hero-stats { gap: 24px; }
+
+      .writing-tag { display: none; }
+
+      .edu-card-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">eryl<span>.</span>clifford</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────────────── -->
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">Open to global opportunities</div>
+        <h1>Hi, I'm <em>Eryl Clifford</em>.<br>I design enterprise products<br>that actually work.</h1>
+        <p class="hero-sub">
+          Senior Product Designer with 4+ years crafting end-to-end UX for enterprise
+          platforms across India and the UAE. From 0→1 products to scalable design systems
+          — I turn complex user needs into clean, accessible, measurable outcomes.
+        </p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">
+            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12h18M13 6l6 6-6 6"/></svg>
+            View my work
+          </a>
+          <a href="#contact" class="btn btn-ghost">Say hello</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Years of experience</div>
+          </div>
+          <div>
+            <div class="stat-num">80+</div>
+            <div class="stat-label">Design system components</div>
+          </div>
+          <div>
+            <div class="stat-num">10K+</div>
+            <div class="stat-label">Enterprise users impacted</div>
+          </div>
+          <div>
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Enterprise products shipped</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── About ───────────────────────────────────────────────── -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <p class="section-label">// about</p>
+            <h2>Design that bridges people and products</h2>
+            <p>
+              I'm a Senior Product Designer based in Udupi, India, with a track record of
+              delivering end-to-end UX for enterprise web and mobile platforms. I've led
+              design for high-profile clients across the UAE — including Etisalat, Dolphin
+              Energy, and Almarai — translating research into measurable improvements.
+            </p>
+            <p>
+              My work spans 0→1 product design, accessibility-first systems, AI-augmented
+              prototyping, and cross-functional collaboration. I care about the gap between
+              user needs and technical constraints — and I build bridges across it.
+            </p>
+            <div class="about-tags">
+              <span class="tag">0→1_design</span>
+              <span class="tag">design_systems</span>
+              <span class="tag">WCAG_2.1_AA</span>
+              <span class="tag">AI-augmented</span>
+              <span class="tag">enterprise_UX</span>
+              <span class="tag">open_to_global_roles</span>
+            </div>
+          </div>
+          <div>
+            <div class="about-card">
+              <div class="about-card-header">
+                <div class="avatar">ECA</div>
+                <div>
+                  <div class="about-card-name">Eryl Clifford Amanna</div>
+                  <div class="about-card-role">Senior Product Designer</div>
+                </div>
+              </div>
+              <div class="about-item">
+                <span class="about-item-key">Based in</span>
+                <span class="about-item-val">Udupi, India</span>
+              </div>
+              <div class="about-item">
+                <span class="about-item-key">Timezone</span>
+                <span class="about-item-val">IST — UTC+5:30</span>
+              </div>
+              <div class="about-item">
+                <span class="about-item-key">Availability</span>
+                <span class="about-item-val" style="color:var(--accent)">Open to global roles</span>
+              </div>
+              <div class="about-item">
+                <span class="about-item-key">Focus</span>
+                <span class="about-item-val">Enterprise UX · Design Systems</span>
+              </div>
+              <div class="about-item">
+                <span class="about-item-key">Education</span>
+                <span class="about-item-val">B.Tech Media Tech, MIT MAHE</span>
+              </div>
+              <div style="margin-top:14px;">
+                <span class="award-badge">🏆 Novigo Extra Miler Award 2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── Work ────────────────────────────────────────────────── -->
+    <section id="work">
+      <div class="container">
+        <div class="work-header">
+          <div>
+            <p class="section-label">// selected work</p>
+            <h2>Projects I'm proud of</h2>
+          </div>
+        </div>
+        <div class="projects-grid">
+
+          <!-- Featured -->
+          <div class="project-card featured">
+            <div class="project-thumb thumb-dpe">
+              <div class="project-thumb-inner">
+                <span class="project-thumb-label">DPE Learning App · Mobile & Web</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">Featured · UI/UX Redesign</span>
+                <span class="project-year">2023</span>
+              </div>
+              <h3>DPE Learning App — Dubai Petroleum</h3>
+              <p>
+                Led end-to-end UI/UX redesign of the learning platform for 5,000+ Dubai Petroleum employees.
+                Addressed 12 core usability issues via competitive benchmarking and user testing. Designed
+                a personalised dashboard with course progress, overdue alerts, and certifications — driving
+                measurable uplift in course completion within 60 days of launch.
+              </p>
+              <div class="project-metric">↑ Measurable course completion within 60 days</div>
+              <div class="project-stack">
+                <span class="stack-tag">Figma</span>
+                <span class="stack-tag">User Research</span>
+                <span class="stack-tag">Mobile Design</span>
+                <span class="stack-tag">Competitive Benchmarking</span>
+                <span class="stack-tag">Dashboard Design</span>
+              </div>
+              <div class="project-links">
+                <span class="link-btn primary">Case study →</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dolphin Energy -->
+          <div class="project-card">
+            <div class="project-thumb thumb-dolphin">
+              <div class="project-thumb-inner">
+                <span class="project-thumb-label">Document Management · Intranet</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">Enterprise UX</span>
+                <span class="project-year">2023</span>
+              </div>
+              <h3>Dolphin Energy — Document Management System</h3>
+              <p>
+                Redesigned the internal DMS for 500+ Dolphin Energy employees in Abu Dhabi.
+                Transformed a legacy intranet into a streamlined, role-adapted platform with
+                Favourites Folder and Timeline View. Delivered production-ready within
+                Microsoft Power Apps constraints.
+              </p>
+              <div class="project-metric">↓ 40% document retrieval time</div>
+              <div class="project-stack">
+                <span class="stack-tag">Figma</span>
+                <span class="stack-tag">Microsoft Power Apps</span>
+                <span class="stack-tag">Information Architecture</span>
+              </div>
+              <div class="project-links">
+                <span class="link-btn primary">Case study →</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Almarai -->
+          <div class="project-card">
+            <div class="project-thumb thumb-almarai">
+              <div class="project-thumb-inner">
+                <span class="project-thumb-label">Quality & Event Suite · Multi-platform</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">Design System</span>
+                <span class="project-year">2024</span>
+              </div>
+              <h3>Almarai — Quality & Event Management Suite</h3>
+              <p>
+                Designed two cohesive internal applications for one of the world's largest
+                dairy companies — used across web, phone, and tablet. Leveraged Figma AI,
+                ChatGPT, and Claude to compress concept-to-wireframe cycles and accelerate
+                stakeholder alignment.
+              </p>
+              <div class="project-metric">AI-augmented prototyping workflow</div>
+              <div class="project-stack">
+                <span class="stack-tag">Figma AI</span>
+                <span class="stack-tag">Design Tokens</span>
+                <span class="stack-tag">Multi-platform</span>
+                <span class="stack-tag">Generative AI</span>
+              </div>
+              <div class="project-links">
+                <span class="link-btn primary">Case study →</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- NoviCore -->
+          <div class="project-card" style="grid-column: span 2;">
+            <div class="project-thumb thumb-novicore" style="aspect-ratio:21/9;">
+              <div class="project-thumb-inner">
+                <span class="project-thumb-label">Corporate Website · Brand Identity</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="project-type">Brand &amp; Web</span>
+                <span class="project-year">2022</span>
+              </div>
+              <h3>NoviCore — Corporate Website Redesign</h3>
+              <p>
+                Led end-to-end redesign of the Novigo corporate website with a cross-functional team of 6.
+                Conducted structured user interviews (n=5) to surface pain points, defined a new visual identity
+                system — typography, colour palette, and design guidelines — and redesigned every page from the
+                ground up aligned to validated user needs.
+              </p>
+              <div class="project-metric">↓ ~35% key task completion time post-launch</div>
+              <div class="project-stack">
+                <span class="stack-tag">Figma</span>
+                <span class="stack-tag">User Interviews</span>
+                <span class="stack-tag">Brand Identity</span>
+                <span class="stack-tag">Visual Design</span>
+                <span class="stack-tag">Design Guidelines</span>
+              </div>
+              <div class="project-links">
+                <span class="link-btn primary">Case study →</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── Skills ──────────────────────────────────────────────── -->
+    <section id="skills">
+      <div class="container">
+        <p class="section-label">// toolkit</p>
+        <h2 style="margin-bottom:32px;">What I work with</h2>
+        <div class="skills-grid">
+
+          <div class="skill-card">
+            <div class="skill-icon">🔍</div>
+            <h4>UX Research</h4>
+            <div class="skill-items">
+              <span class="skill-item">Moderated usability testing</span>
+              <span class="skill-item">Stakeholder interviews</span>
+              <span class="skill-item">Affinity &amp; opportunity mapping</span>
+              <span class="skill-item">Jobs-to-be-done (JTBD)</span>
+              <span class="skill-item">User journey mapping</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">⚡</div>
+            <h4>Product Design</h4>
+            <div class="skill-items">
+              <span class="skill-item">0→1 product design</span>
+              <span class="skill-item">Information architecture</span>
+              <span class="skill-item">Wireframing &amp; prototyping</span>
+              <span class="skill-item">A/B testing</span>
+              <span class="skill-item">Service design</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🧩</div>
+            <h4>Design Systems</h4>
+            <div class="skill-items">
+              <span class="skill-item">Component libraries (80+ components)</span>
+              <span class="skill-item">Design tokens</span>
+              <span class="skill-item">WCAG 2.1 AA accessibility</span>
+              <span class="skill-item">Inclusive design</span>
+              <span class="skill-item">Designer–engineer handoff</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🤖</div>
+            <h4>AI &amp; Innovation</h4>
+            <div class="skill-items">
+              <span class="skill-item">AI-augmented design workflows</span>
+              <span class="skill-item">Generative AI prototyping</span>
+              <span class="skill-item">Prompt engineering</span>
+              <span class="skill-item">Figma AI · Claude · ChatGPT</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🎨</div>
+            <h4>Visual &amp; Creative</h4>
+            <div class="skill-items">
+              <span class="skill-item">Graphic design</span>
+              <span class="skill-item">Presentation design</span>
+              <span class="skill-item">Motion graphics</span>
+              <span class="skill-item">Video production &amp; editing</span>
+              <span class="skill-item">Brand identity</span>
+            </div>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-icon">🛠</div>
+            <h4>Tools</h4>
+            <div class="skill-items">
+              <span class="skill-item">Figma · Sketch</span>
+              <span class="skill-item">Adobe PS · AI · Premiere Pro</span>
+              <span class="skill-item">Miro · Draw.io · Notion</span>
+              <span class="skill-item">Microsoft Power Apps</span>
+              <span class="skill-item">Canva</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── Experience ──────────────────────────────────────────── -->
+    <section id="experience">
+      <div class="container">
+        <p class="section-label">// experience &amp; education</p>
+        <h2 style="margin-bottom:40px;">Where I've worked</h2>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-company">Novigo Solutions · India</div>
+            <div class="timeline-header">
+              <div class="timeline-role">Senior Product Designer</div>
+              <div class="timeline-period">Mar 2022 — Present</div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Led end-to-end design for 4+ enterprise products across iOS, Android, macOS, and Windows for 10,000+ users across UAE and India.</li>
+              <li>Built and maintained a Figma design system of 80+ components and a full token library, cutting UI implementation effort by 30% and reducing handoff time by ~2 days per sprint.</li>
+              <li>Conducted 12+ moderated usability tests and 20+ stakeholder interviews per year; drove 3–5 measurable UX improvements per product cycle.</li>
+              <li>Designed for Etisalat, Dolphin Energy, and Almarai — demonstrating strong consulting and regional market expertise.</li>
+              <li>Ensured WCAG 2.1 AA compliance across key product surfaces.</li>
+            </ul>
+            <div class="timeline-tags">
+              <span class="tag">Figma</span>
+              <span class="tag">Design Systems</span>
+              <span class="tag">User Research</span>
+              <span class="tag">Enterprise UX</span>
+              <span class="tag">WCAG 2.1 AA</span>
+              <span class="tag">AI-augmented</span>
+              <span class="tag">🏆 Extra Miler Award 2023</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Education -->
+        <div class="edu-card">
+          <div class="edu-card-header">
+            <div>
+              <div class="edu-school">Manipal Institute of Technology, MAHE · India</div>
+              <div class="edu-degree">Bachelor of Technology — Media Technology</div>
+            </div>
+            <div class="edu-year">2021</div>
+          </div>
+          <div class="edu-courses">
+            <strong style="color:var(--body);font-size:.8125rem;">Relevant coursework:</strong>
+            Human–Computer Interaction · Digital Image Processing · Web Technology ·
+            Perception &amp; Cognition · Colour Science · Visual Design &amp; Digital Assets ·
+            Interaction &amp; Motion Design · Digital Analytics · Media Law &amp; Ethics
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── Writing ─────────────────────────────────────────────── -->
+    <section id="writing">
+      <div class="container">
+        <div class="work-header">
+          <div>
+            <p class="section-label">// writing</p>
+            <h2>Thoughts &amp; articles</h2>
+          </div>
+        </div>
+        <div class="writing-list">
+          <a href="#" class="writing-item">
+            <span class="writing-date">Coming soon</span>
+            <span class="writing-title">Why accessibility-first design is also better business</span>
+            <span class="writing-tag">Accessibility</span>
+          </a>
+          <a href="#" class="writing-item">
+            <span class="writing-date">Coming soon</span>
+            <span class="writing-title">How I used AI tools to compress my concept-to-wireframe cycle</span>
+            <span class="writing-tag">AI + Design</span>
+          </a>
+          <a href="#" class="writing-item">
+            <span class="writing-date">Coming soon</span>
+            <span class="writing-title">Design tokens: the bridge between design and engineering</span>
+            <span class="writing-tag">Design Systems</span>
+          </a>
+          <a href="#" class="writing-item">
+            <span class="writing-date">Coming soon</span>
+            <span class="writing-title">What 20+ stakeholder interviews taught me about enterprise UX</span>
+            <span class="writing-tag">Research</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ── Contact ─────────────────────────────────────────────── -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-inner">
+          <p class="section-label">// contact</p>
+          <h2>Let's work together</h2>
+          <p>Open to global product design roles, contract work, or just a good conversation about design. My inbox is always open.</p>
+          <form class="contact-form" onsubmit="return false;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" type="text" placeholder="Your name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input id="subject" type="text" placeholder="What's this about?" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Tell me about your project or just say hi…"></textarea>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
+                Send message
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+            </div>
+          </form>
+
+          <!-- Languages -->
+          <div class="lang-row">
+            <div class="lang-chip">
+              <span class="lang-name">English</span>
+              <span class="lang-level">Fluent</span>
+            </div>
+            <div class="lang-chip">
+              <span class="lang-name">Kannada</span>
+              <span class="lang-level">Native</span>
+            </div>
+            <div class="lang-chip">
+              <span class="lang-name">Tulu</span>
+              <span class="lang-level">Native</span>
+            </div>
+            <div class="lang-chip">
+              <span class="lang-name">Hindi</span>
+              <span class="lang-level">Proficient</span>
+            </div>
+          </div>
+
+          <div class="contact-social">
+            <a href="https://linkedin.com/in/erylclifford" class="social-link" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="mailto:erylclifford@gmail.com" class="social-link">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              erylclifford@gmail.com
+            </a>
+            <a href="https://erylclifford.com" class="social-link" target="_blank" rel="noopener">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              erylclifford.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-copy">© 2025 Eryl Clifford Amanna. Designed with care.</span>
+        <a href="#" class="footer-back">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
