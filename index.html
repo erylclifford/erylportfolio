@@ -400,6 +400,50 @@
       backdrop-filter: blur(4px);
     }
 
+    /* ─── Thumb hover overlay ──────────────────────────────────── */
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgb(9 9 11 / .82) 0%, rgb(9 9 11 / .2) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+
+    .thumb-overlay-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -.01em;
+      line-height: 1.3;
+      transform: translateY(6px);
+      transition: transform .25s ease;
+    }
+
+    .thumb-overlay-sub {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: rgb(255 255 255 / .6);
+      margin-top: 3px;
+      transform: translateY(6px);
+      transition: transform .25s ease .04s;
+    }
+
+    .project-card:hover .thumb-overlay {
+      opacity: 1;
+    }
+
+    .project-card:hover .thumb-overlay-name,
+    .project-card:hover .thumb-overlay-sub {
+      transform: translateY(0);
+    }
+
+    .project-thumb { position: relative; }
+
     .thumb-dpe {
       background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #c7d2fe 100%);
     }
@@ -1041,15 +1085,17 @@
 
           <!-- Featured -->
           <div class="project-card featured">
-            <div class="project-thumb thumb-dpe">
-              <div class="project-thumb-inner">
-                <span class="project-thumb-label">DPE Learning App · Mobile & Web</span>
+            <div class="project-thumb" style="aspect-ratio:21/9;background:#f1f5f9;overflow:hidden;">
+              <img src="assets/dpe-dashboard.png" alt="DPE Learning App Dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+              <div class="thumb-overlay">
+                <div class="thumb-overlay-name">DPE Learning App — Dubai Petroleum</div>
+                <div class="thumb-overlay-sub">UI/UX Redesign · Feb 2026</div>
               </div>
             </div>
             <div class="project-body">
               <div class="project-meta">
                 <span class="project-type">Featured · UI/UX Redesign</span>
-                <span class="project-year">2023</span>
+                <span class="project-year">Feb 2026</span>
               </div>
               <h3>DPE Learning App — Dubai Petroleum</h3>
               <p>
@@ -1075,8 +1121,9 @@
           <!-- Dolphin Energy -->
           <div class="project-card">
             <div class="project-thumb thumb-dolphin">
-              <div class="project-thumb-inner">
-                <span class="project-thumb-label">Document Management · Intranet</span>
+              <div class="thumb-overlay">
+                <div class="thumb-overlay-name">Dolphin Energy — Document Management</div>
+                <div class="thumb-overlay-sub">Enterprise UX · 2023</div>
               </div>
             </div>
             <div class="project-body">
@@ -1105,15 +1152,17 @@
 
           <!-- Almarai -->
           <div class="project-card">
-            <div class="project-thumb thumb-almarai">
-              <div class="project-thumb-inner">
-                <span class="project-thumb-label">Quality & Event Suite · Multi-platform</span>
+            <div class="project-thumb" style="background:#f1f5f9;overflow:hidden;">
+              <img src="assets/almarai-dashboard.png" alt="Almarai Quality Management Dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+              <div class="thumb-overlay">
+                <div class="thumb-overlay-name">Almarai — Quality & Event Management Suite</div>
+                <div class="thumb-overlay-sub">Design System · Dec 2025 – Present</div>
               </div>
             </div>
             <div class="project-body">
               <div class="project-meta">
                 <span class="project-type">Design System</span>
-                <span class="project-year">2024</span>
+                <span class="project-year">Dec 2025 – Present</span>
               </div>
               <h3>Almarai — Quality & Event Management Suite</h3>
               <p>
@@ -1138,8 +1187,9 @@
           <!-- NoviCore -->
           <div class="project-card" style="grid-column: span 2;">
             <div class="project-thumb thumb-novicore" style="aspect-ratio:21/9;">
-              <div class="project-thumb-inner">
-                <span class="project-thumb-label">Corporate Website · Brand Identity</span>
+              <div class="thumb-overlay">
+                <div class="thumb-overlay-name">NoviCore — Corporate Website Redesign</div>
+                <div class="thumb-overlay-sub">Brand & Web · 2022</div>
               </div>
             </div>
             <div class="project-body">
