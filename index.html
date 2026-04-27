@@ -11,12 +11,48 @@
     /* ─── Reset & Base ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ─── Skip Nav (WCAG 2.4.1) ────────────────────────────────── */
+    .skip-nav {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      z-index: 9999;
+      padding: 10px 20px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      font-size: .9rem;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      text-decoration: none;
+      transition: top .15s;
+    }
+
+    .skip-nav:focus { top: 0; }
+
+    /* ─── Focus visible (WCAG 2.4.7) ───────────────────────────── */
+    :focus { outline: none; }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ─── Reduced motion (WCAG 2.3.3) ──────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
     :root {
       --bg:        #f5f5f5;
       --surface:   #ffffff;
       --border:    #e4e4e7;
-      --muted:     #a1a1aa;
-      --subtle:    #71717a;
+      --muted:     #666666; /* 4.65:1 on --bg — WCAG AA ✓ */
+      --subtle:    #52525b; /* 7.4:1 on --bg — WCAG AAA ✓ */
       --body:      #27272a;
       --heading:   #09090b;
       --accent:    #2563eb;
@@ -288,17 +324,31 @@
 
     .avatar {
       width: 52px; height: 52px;
-      background: linear-gradient(135deg, #bfdbfe, #93c5fd);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--accent);
+      overflow: hidden;
       flex-shrink: 0;
-      font-family: var(--font-mono);
-      letter-spacing: -.02em;
+      border: 2px solid var(--border);
+    }
+
+    .avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .hero-photo {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--surface);
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .hero-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
     }
 
     .about-card-name { font-weight: 600; color: var(--heading); }
@@ -443,7 +493,8 @@
       transform: translateY(-3px);
     }
 
-    .project-card.featured {
+    .project-card.featured,
+    .project-card-full {
       grid-column: span 2;
     }
 
@@ -539,7 +590,8 @@
       background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
     }
 
-    .project-card.featured .project-thumb {
+    .project-card.featured .project-thumb,
+    .project-thumb-wide {
       aspect-ratio: 21/9;
     }
 
@@ -1004,35 +1056,96 @@
       margin: 0;
     }
 
-    /* ─── Responsive ───────────────────────────────────────────── */
+    /* ─── Hamburger ────────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--heading);
+      border-radius: 2px;
+      transition: all .2s;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 0;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-size: .9rem;
+      font-weight: 500;
+      color: var(--subtle);
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: color .18s, background .18s;
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--accent); background: var(--accent-lo); }
+
+    /* ─── Tablet ────────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .skills-grid  { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── Mobile ────────────────────────────────────────────────── */
     @media (max-width: 640px) {
       section { padding: 60px 0; }
       .hero { padding: 108px 0 64px; }
 
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
 
       .about-grid,
       .projects-grid,
       .skills-grid,
+      .services-grid,
       .form-row { grid-template-columns: 1fr; }
 
-      .services-grid { grid-template-columns: 1fr; }
-      .project-card.featured { grid-column: span 1; }
-      .project-card.featured .project-thumb { aspect-ratio: 16/9; }
+      .project-card.featured,
+      .project-card-full { grid-column: span 1 !important; }
+      .project-card.featured .project-thumb,
+      .project-card-full .project-thumb { aspect-ratio: 16/9 !important; }
 
       .hero h1 { font-size: 2rem; }
-      .hero-stats { gap: 24px; }
+      .hero-stats { gap: 20px; }
+      .hero-stats .stat-num { font-size: 1.4rem; }
 
+      .writing-date { min-width: 70px; }
       .writing-tag { display: none; }
 
       .edu-card-header { flex-direction: column; }
+
+      .about-tagline { text-align: center; }
+
+      .contact-social { justify-content: flex-start; }
+
+      .timeline::before { left: 0; }
     }
   </style>
 </head>
 <body>
 
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+
   <!-- ── Nav ────────────────────────────────────────────────────── -->
-  <nav>
+  <nav aria-label="Primary navigation">
     <div class="nav-inner">
       <a href="#" class="nav-logo">eryl<span>.</span>clifford</a>
       <ul class="nav-links">
@@ -1043,13 +1156,36 @@
         <li><a href="#writing">Writing</a></li>
         <li><a href="#contact" class="nav-cta">Get in touch</a></li>
       </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about"      onclick="closeMobileMenu()">About</a>
+      <a href="#work"       onclick="closeMobileMenu()">Work</a>
+      <a href="#skills"     onclick="closeMobileMenu()">Skills</a>
+      <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+      <a href="#writing"    onclick="closeMobileMenu()">Writing</a>
+      <a href="#contact"    onclick="closeMobileMenu()" style="color:var(--accent);font-weight:600;">Get in touch</a>
     </div>
   </nav>
 
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+    function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+  </script>
+
   <!-- ── Hero ───────────────────────────────────────────────────── -->
-  <main>
+  <main id="main-content">
     <section class="hero">
       <div class="container">
+        <div class="hero-photo"><img src="assets/eryl-photo.jpg" alt="Eryl Clifford" /></div>
         <div class="hero-eyebrow">Open to global opportunities</div>
         <h1>Hi, I'm <em>Eryl Clifford</em>.<br>I design enterprise products<br>that actually work.</h1>
         <p class="hero-sub">
@@ -1114,7 +1250,7 @@
           <div>
             <div class="about-card">
               <div class="about-card-header">
-                <div class="avatar">ECA</div>
+                <div class="avatar"><img src="assets/eryl-photo.jpg" alt="Eryl Clifford" /></div>
                 <div>
                   <div class="about-card-name">Eryl Clifford Amanna</div>
                   <div class="about-card-role">Senior Product Designer</div>
@@ -1201,7 +1337,7 @@
 
           <!-- Featured -->
           <div class="project-card featured">
-            <div class="project-thumb" style="aspect-ratio:21/9;background:#f8fafc;overflow:hidden;">
+            <div class="project-thumb" style="aspect-ratio:21/9;background:#ffffff;overflow:hidden;">
               <img src="assets/dpe-mockup.png" alt="DPE Learning App" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">DPE Learning App — Dubai Petroleum</div>
@@ -1229,14 +1365,14 @@
                 <span class="stack-tag">Dashboard Design</span>
               </div>
               <div class="project-links">
-                <span class="link-btn primary">Case study →</span>
+                <a href="#" class="link-btn primary">Case study →</a>
               </div>
             </div>
           </div>
 
           <!-- Dolphin Energy -->
           <div class="project-card">
-            <div class="project-thumb" style="background:#f8fafc;overflow:hidden;">
+            <div class="project-thumb" style="background:#ffffff;overflow:hidden;">
               <img src="assets/dolphin-mockup.png" alt="Dolphin Energy DMS" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">Dolphin Energy — Document Management</div>
@@ -1262,14 +1398,14 @@
                 <span class="stack-tag">Information Architecture</span>
               </div>
               <div class="project-links">
-                <span class="link-btn primary">Case study →</span>
+                <a href="#" class="link-btn primary">Case study →</a>
               </div>
             </div>
           </div>
 
           <!-- Almarai -->
           <div class="project-card">
-            <div class="project-thumb" style="background:#f8fafc;overflow:hidden;">
+            <div class="project-thumb" style="background:#ffffff;overflow:hidden;">
               <img src="assets/almarai-mockup.png" alt="Almarai Quality Management" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">Almarai — Quality & Event Management Suite</div>
@@ -1296,14 +1432,14 @@
                 <span class="stack-tag">Generative AI</span>
               </div>
               <div class="project-links">
-                <span class="link-btn primary">Case study →</span>
+                <a href="#" class="link-btn primary">Case study →</a>
               </div>
             </div>
           </div>
 
           <!-- NoviCore -->
-          <div class="project-card" style="grid-column: span 2;">
-            <div class="project-thumb" style="aspect-ratio:21/9;background:#f8fafc;overflow:hidden;">
+          <div class="project-card project-card-full">
+            <div class="project-thumb project-thumb-wide" style="background:#ffffff;overflow:hidden;">
               <img src="assets/novicore-mockup.png" alt="NoviCore Website Redesign" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">NoviCore — Corporate Website Redesign</div>
@@ -1331,7 +1467,7 @@
                 <span class="stack-tag">Design Guidelines</span>
               </div>
               <div class="project-links">
-                <span class="link-btn primary">Case study →</span>
+                <a href="#" class="link-btn primary">Case study →</a>
               </div>
             </div>
           </div>
@@ -1621,7 +1757,7 @@
           </div>
 
           <div class="contact-social">
-            <a href="https://linkedin.com/in/erylclifford" class="social-link" target="_blank" rel="noopener">
+            <a href="https://linkedin.com/in/erylclifford" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               LinkedIn
             </a>
@@ -1629,7 +1765,7 @@
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               erylclifford@gmail.com
             </a>
-            <a href="https://erylclifford.com" class="social-link" target="_blank" rel="noopener">
+            <a href="https://erylclifford.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Personal website (opens in new tab)">
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
               erylclifford.com
             </a>
@@ -1640,7 +1776,7 @@
   </main>
 
   <!-- ── Footer ─────────────────────────────────────────────────── -->
-  <footer>
+  <footer role="contentinfo">
     <div class="container">
       <div class="footer-inner">
         <span class="footer-copy">© 2025 Eryl Clifford Amanna. Designed with care.</span>
