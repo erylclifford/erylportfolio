@@ -316,6 +316,85 @@
     .about-item-key { color: var(--muted); }
     .about-item-val { font-weight: 500; color: var(--heading); }
 
+    /* ─── Services ─────────────────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .service-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .service-item:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+
+    .service-icon {
+      font-size: 1.1rem;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .service-title {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 3px;
+    }
+
+    .service-desc {
+      font-size: .8125rem;
+      color: var(--subtle);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── Quick bits ────────────────────────────────────────────── */
+    .quick-bits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .bit-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .8125rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--body);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about-tagline {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
     .award-badge {
       display: inline-flex;
       align-items: center;
@@ -937,6 +1016,7 @@
       .skills-grid,
       .form-row { grid-template-columns: 1fr; }
 
+      .services-grid { grid-template-columns: 1fr; }
       .project-card.featured { grid-column: span 1; }
       .project-card.featured .project-thumb { aspect-ratio: 16/9; }
 
@@ -1029,7 +1109,6 @@
               <span class="tag">WCAG_2.1_AA</span>
               <span class="tag">AI-augmented</span>
               <span class="tag">enterprise_UX</span>
-              <span class="tag">open_to_global_roles</span>
             </div>
           </div>
           <div>
@@ -1067,6 +1146,43 @@
             </div>
           </div>
         </div>
+
+        <!-- Services — full width below the grid -->
+        <div class="services-grid" style="margin-top:40px;">
+          <div class="service-item">
+            <span class="service-icon">🖥</span>
+            <div>
+              <div class="service-title">UI/UX Design</div>
+              <p class="service-desc">I design websites and apps that are simple to use. I make sure users can easily find what they need and enjoy their experience.</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <span class="service-icon">🎨</span>
+            <div>
+              <div class="service-title">Graphic Design</div>
+              <p class="service-desc">I create graphics like logos, posters, and social media images that help tell your story and attract attention.</p>
+            </div>
+          </div>
+          <div class="service-item">
+            <span class="service-icon">🎬</span>
+            <div>
+              <div class="service-title">Video Editing</div>
+              <p class="service-desc">I edit videos to make sure your message comes across in an engaging and professional way — for promotions, ads, or social media.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick bits + tagline -->
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+          <div class="quick-bits" style="margin-top:0;">
+            <span class="bit-chip">🎓 B.Tech Media Tech Engineering</span>
+            <span class="bit-chip">🎯 Design Advocate</span>
+            <span class="bit-chip">💻 Tech Enthusiast</span>
+            <span class="bit-chip">🎵 Musician</span>
+          </div>
+          <p class="about-tagline" style="margin-top:0;padding-top:0;border-top:none;">Turning your clicks into 'wow' — one pixel at a time. 😉</p>
+        </div>
+
       </div>
     </section>
 
@@ -1085,8 +1201,8 @@
 
           <!-- Featured -->
           <div class="project-card featured">
-            <div class="project-thumb" style="aspect-ratio:21/9;background:#f1f5f9;overflow:hidden;">
-              <img src="assets/dpe-dashboard.png" alt="DPE Learning App Dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+            <div class="project-thumb" style="aspect-ratio:21/9;background:#f8fafc;overflow:hidden;">
+              <img src="assets/dpe-mockup.png" alt="DPE Learning App" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">DPE Learning App — Dubai Petroleum</div>
                 <div class="thumb-overlay-sub">UI/UX Redesign · Feb 2026</div>
@@ -1120,16 +1236,17 @@
 
           <!-- Dolphin Energy -->
           <div class="project-card">
-            <div class="project-thumb thumb-dolphin">
+            <div class="project-thumb" style="background:#f8fafc;overflow:hidden;">
+              <img src="assets/dolphin-mockup.png" alt="Dolphin Energy DMS" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">Dolphin Energy — Document Management</div>
-                <div class="thumb-overlay-sub">Enterprise UX · 2023</div>
+                <div class="thumb-overlay-sub">Enterprise UX · Aug 2024 – Jun 2025</div>
               </div>
             </div>
             <div class="project-body">
               <div class="project-meta">
                 <span class="project-type">Enterprise UX</span>
-                <span class="project-year">2023</span>
+                <span class="project-year">Aug 2024 – Jun 2025</span>
               </div>
               <h3>Dolphin Energy — Document Management System</h3>
               <p>
@@ -1152,8 +1269,8 @@
 
           <!-- Almarai -->
           <div class="project-card">
-            <div class="project-thumb" style="background:#f1f5f9;overflow:hidden;">
-              <img src="assets/almarai-dashboard.png" alt="Almarai Quality Management Dashboard" style="width:100%;height:100%;object-fit:cover;object-position:top;" />
+            <div class="project-thumb" style="background:#f8fafc;overflow:hidden;">
+              <img src="assets/almarai-mockup.png" alt="Almarai Quality Management" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">Almarai — Quality & Event Management Suite</div>
                 <div class="thumb-overlay-sub">Design System · Dec 2025 – Present</div>
@@ -1186,16 +1303,17 @@
 
           <!-- NoviCore -->
           <div class="project-card" style="grid-column: span 2;">
-            <div class="project-thumb thumb-novicore" style="aspect-ratio:21/9;">
+            <div class="project-thumb" style="aspect-ratio:21/9;background:#f8fafc;overflow:hidden;">
+              <img src="assets/novicore-mockup.png" alt="NoviCore Website Redesign" style="width:100%;height:100%;object-fit:contain;padding:16px;" />
               <div class="thumb-overlay">
                 <div class="thumb-overlay-name">NoviCore — Corporate Website Redesign</div>
-                <div class="thumb-overlay-sub">Brand & Web · 2022</div>
+                <div class="thumb-overlay-sub">Brand & Web · May 2025 – Dec 2025</div>
               </div>
             </div>
             <div class="project-body">
               <div class="project-meta">
                 <span class="project-type">Brand &amp; Web</span>
-                <span class="project-year">2022</span>
+                <span class="project-year">May 2025 – Dec 2025</span>
               </div>
               <h3>NoviCore — Corporate Website Redesign</h3>
               <p>
